@@ -15,8 +15,6 @@ pub struct User {
     pub notifications: Vec<Notification>,
 }
 
-#[derive(prost::Enumeration)]
-#[repr(u32)]
 pub enum AccountType {
     TRADING = 0,
     GIRO = 1,
@@ -30,7 +28,7 @@ pub struct BankAccount {
     pub id: u64,
     pub name: String,
     pub iban: String,
-    pub account_type: u32,
+    pub account_type: i32,
     pub balance: i32,
     pub transactions: Vec<Transaction>,
 }
