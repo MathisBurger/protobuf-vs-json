@@ -3,7 +3,13 @@ use protobufVsJson::protobuf::data;
 
 use super::ProtobufImpl;
 
-impl ProtobufImpl<data::MidUser> for structures::mid::User {
+impl ProtobufImpl<structures::mid::User, data::MidUser> for structures::mid::User {
+    fn convert_all(all: Vec<structures::mid::User>) -> Vec<data::MidUser> {
+        return all
+            .iter()
+            .map(|x| x.clone().convert_to_protobuf())
+            .collect();
+    }
     fn convert_to_protobuf(&mut self) -> data::MidUser {
         return data::MidUser {
             id: self.id,

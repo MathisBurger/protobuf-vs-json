@@ -3,7 +3,13 @@ use protobufVsJson::protobuf::data;
 
 use super::ProtobufImpl;
 
-impl ProtobufImpl<data::LargeUser> for large::User {
+impl ProtobufImpl<large::User, data::LargeUser> for large::User {
+    fn convert_all(all: Vec<large::User>) -> Vec<data::LargeUser> {
+        return all
+            .iter()
+            .map(|x| x.clone().convert_to_protobuf())
+            .collect();
+    }
     fn convert_to_protobuf(&mut self) -> data::LargeUser {
         let converted_accounts: Vec<data::large_user::BankAccount> = self
             .accounts
@@ -39,7 +45,14 @@ impl ProtobufImpl<data::LargeUser> for large::User {
     }
 }
 
-impl ProtobufImpl<data::large_user::BankAccount> for large::BankAccount {
+impl ProtobufImpl<large::BankAccount, data::large_user::BankAccount> for large::BankAccount {
+    fn convert_all(all: Vec<large::BankAccount>) -> Vec<data::large_user::BankAccount> {
+        return all
+            .iter()
+            .map(|x| x.clone().convert_to_protobuf())
+            .collect();
+    }
+
     fn convert_to_protobuf(&mut self) -> data::large_user::BankAccount {
         let converted_transactions: Vec<data::large_user::bank_account::Transaction> = self
             .transactions
@@ -62,7 +75,18 @@ impl ProtobufImpl<data::large_user::BankAccount> for large::BankAccount {
     }
 }
 
-impl ProtobufImpl<data::large_user::bank_account::Transaction> for large::Transaction {
+impl ProtobufImpl<large::Transaction, data::large_user::bank_account::Transaction>
+    for large::Transaction
+{
+    fn convert_all(
+        all: Vec<large::Transaction>,
+    ) -> Vec<data::large_user::bank_account::Transaction> {
+        return all
+            .iter()
+            .map(|x| x.clone().convert_to_protobuf())
+            .collect();
+    }
+
     fn convert_to_protobuf(&mut self) -> data::large_user::bank_account::Transaction {
         return data::large_user::bank_account::Transaction {
             id: self.id,
@@ -75,7 +99,14 @@ impl ProtobufImpl<data::large_user::bank_account::Transaction> for large::Transa
     }
 }
 
-impl ProtobufImpl<data::large_user::Notification> for large::Notification {
+impl ProtobufImpl<large::Notification, data::large_user::Notification> for large::Notification {
+    fn convert_all(all: Vec<large::Notification>) -> Vec<data::large_user::Notification> {
+        return all
+            .iter()
+            .map(|x| x.clone().convert_to_protobuf())
+            .collect();
+    }
+
     fn convert_to_protobuf(&mut self) -> data::large_user::Notification {
         return data::large_user::Notification {
             id: self.id,

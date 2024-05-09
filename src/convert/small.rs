@@ -3,7 +3,14 @@ use protobufVsJson::protobuf::data;
 
 use super::ProtobufImpl;
 
-impl ProtobufImpl<data::SmallStructure> for small::SmallStructure {
+impl ProtobufImpl<small::SmallStructure, data::SmallStructure> for small::SmallStructure {
+    fn convert_all(all: Vec<Self>) -> Vec<data::SmallStructure> {
+        return all
+            .iter()
+            .map(|x| x.clone().convert_to_protobuf())
+            .collect();
+    }
+
     fn convert_to_protobuf(&mut self) -> data::SmallStructure {
         return data::SmallStructure {
             val1: self.val1,
