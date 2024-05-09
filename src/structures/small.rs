@@ -1,3 +1,6 @@
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct SmallStructure {
     pub val1: i32,
     pub val2: String,

@@ -1,11 +1,12 @@
-use chrono::DateTime;
+use serde::{Deserialize, Serialize};
 
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct User {
     pub id: u64,
     pub username: String,
     pub password: String,
     pub date_of_birth: u64,
-    pub age: u8,
+    pub age: u32,
     pub first_name: String,
     pub last_name: String,
     pub alias: String,
@@ -14,6 +15,8 @@ pub struct User {
     pub notifications: Vec<Notification>,
 }
 
+#[derive(prost::Enumeration)]
+#[repr(u32)]
 pub enum AccountType {
     TRADING = 0,
     GIRO = 1,
@@ -22,27 +25,30 @@ pub enum AccountType {
     CREDIT = 4,
 }
 
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct BankAccount {
     pub id: u64,
     pub name: String,
     pub iban: String,
-    pub account_type: AccountType,
+    pub account_type: u32,
     pub balance: i32,
     pub transactions: Vec<Transaction>,
 }
 
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct Transaction {
     pub id: u64,
     pub to_name: String,
     pub to_swift: String,
     pub amount: i32,
     pub is_realtime: bool,
-    pub execution_date: DateTime,
+    pub execution_date: u64,
 }
 
+#[derive(Clone, PartialEq, Serialize, Deserialize)]
 pub struct Notification {
     pub id: u64,
     pub from: String,
     pub content: String,
-    pub date: DateTime,
+    pub date: u64,
 }
