@@ -57,14 +57,14 @@ Protobuf: 1.7539ms (166% faster)
 ## Small
 
 JSON: 116 bytes
-Protobuf: 66 bytes (151% smaller)
+Protobuf: 66 bytes (43% smaller)
 
 ## Mid
 
 JSON: 351 bytes
-Protobuf: 230 bytes (52% smaller)
+Protobuf: 230 bytes (34% smaller)
 
 ## Large
 
 JSON: 113072 bytes
-Protobuf: 59945 bytes (88% smaller)
+Protobuf: 59945 bytes (47% smaller)
